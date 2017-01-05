@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-
 import urllib2
-
 import re
 
 sc=[]
@@ -44,6 +42,7 @@ def scorecard(bat , ball):
 
 
 def full_sc(url1):
+	
 	print "*** Full scorecard ***"
 	
 	content1 = urllib2.urlopen(url1).read()
@@ -51,49 +50,32 @@ def full_sc(url1):
 	bat_inn = soup.findAll("table", "batting-table innings")
 	bowl_inn = soup.findAll("table", "bowling-table")
 	
-
 	for i in range(len(bat_inn)):
 		scorecard(bat_inn[i], bowl_inn[i])
 	#for print fromat
 		sc.append(["*********************"])
-
-
 	## printing the final scorecard
 	for i in sc:
 		print "\t".join(i)
 
 
-
-
-
 def main():
 	#url for the webpage for live matches
 	url = "http://www.espncricinfo.com/ci/engine/match/index.html?view=live"
-
-
 	content = urllib2.urlopen(url).read()
-
-
 	soup = BeautifulSoup(content)
-
-
 	match_sec = soup.findAll("section", "default-match-block")
 
 	#team to be searched 
 	team = raw_input("Enter the name of team ")
+	
 	#flag for successful search
 	flag=0
-
 	for i in match_sec:
-
 		In1= i.find("div", "innings-info-1")
-
 		In2= i.find("div", "innings-info-2")
-
 		status= i.find("div", "match-status")
-
 		p = In1.find(text=re.compile(team , re.I ))
-		
 		q = In2.find(text=re.compile(team, re.I ) )
 		if(p != None or q != None):
 			print In1.get_text() , In2.get_text(), status.get_text()
@@ -109,11 +91,8 @@ def main():
 			
 				#since the scorecard link tag is first tag in this div
 				q = p.find("a")
-			
 				fs_link =  q['href']
-			
 				fs_link="http://www.espncricinfo.com" + fs_link + "?view=scorecard;wrappertype=none"
-				
 				full_sc(fs_link)		
 			break	
 		
