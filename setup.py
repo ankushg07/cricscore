@@ -1,9 +1,12 @@
- 
+#!usr/bin/env python
 from setuptools import setup
 
 setup(
-	name = 'cricket-score',
-	version = '0.1',
+	name='cricket-score',
+	version='1.0',
  	author='Ankush Goyal',
-	scripts =[' cricscore ']
+	packages=['cricket-score'],
+	install_requires=[
+        "beautifulsoup4==4.4.1"
+        ]
 )

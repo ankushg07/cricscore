@@ -1,3 +1,5 @@
+#!usr/bin/python
+
 from bs4 import BeautifulSoup
 import urllib2
 import re
@@ -63,7 +65,7 @@ def main():
 	#url for the webpage for live matches
 	url = "http://www.espncricinfo.com/ci/engine/match/index.html?view=live"
 	content = urllib2.urlopen(url).read()
-	soup = BeautifulSoup(content)
+	soup = BeautifulSoup(content,"lxml")
 	match_sec = soup.findAll("section", "default-match-block")
 
 	#team to be searched 
