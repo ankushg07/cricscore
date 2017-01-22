@@ -46,14 +46,18 @@ def scorecard(bat , ball):
 def full_sc(url1):
 	
 	print "*** Full scorecard ***"
-	
+
 	content1 = urllib2.urlopen(url1).read()
-	soup = BeautifulSoup(content1)
+	soup = BeautifulSoup(content1,"lxml")
 	bat_inn = soup.findAll("table", "batting-table innings")
 	bowl_inn = soup.findAll("table", "bowling-table")
 	
 	for i in range(len(bat_inn)):
-		scorecard(bat_inn[i], bowl_inn[i])
+	
+		try:
+			scorecard(bat_inn[i], bowl_inn[i])
+		except IndexError:
+			continue
 	#for print fromat
 		sc.append(["*********************"])
 	## printing the final scorecard
