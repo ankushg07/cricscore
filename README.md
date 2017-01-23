@@ -1,4 +1,4 @@
-# cricscore
+# Cricscore
 
 A web Crawler built in python using BeautifulSoup to crawl the live score and status for the cricket match happening all over the world
 
